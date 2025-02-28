@@ -339,7 +339,7 @@ export default function AadharVerificationScreen() {
         id: session.user.id,
         first_name: firstName,
         last_name: lastName,
-        phone_number: userData.phone,
+        number: userData.phone,
         phone_verified: true,
         date_of_birth: userData.dob,
         aadhaar_number: userData.aadharNumber,

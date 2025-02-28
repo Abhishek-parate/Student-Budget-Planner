@@ -162,7 +162,7 @@ const useProfileData = (session) => {
     full_name: "",
     first_name: "",
     last_name: "",
-    phone_number: "",
+    number: "",
     date_of_birth: "",
     bio: "",
     location: "",
@@ -187,7 +187,7 @@ const useProfileData = (session) => {
         .select(
           `
            website, avatar_url, full_name, 
-          first_name, last_name, phone_number, date_of_birth,
+          first_name, last_name, number, date_of_birth,
           bio, location, aadhaar_number, membership_type, level
         `
         )
@@ -205,7 +205,7 @@ const useProfileData = (session) => {
           full_name: data.full_name || "",
           first_name: data.first_name || "",
           last_name: data.last_name || "",
-          phone_number: data.phone_number || "",
+          number: data.number || "",
           date_of_birth: data.date_of_birth || "",
           bio: data.bio || "",
           location: data.location || "",
@@ -411,7 +411,7 @@ const ViewProfile = () => {
   const [errors, setErrors] = useState({
     first_name: "",
     last_name: "",
-    phone_number: "",
+    number: "",
     date_of_birth: "",
     aadhaar_number: "",
     website: "",
@@ -452,14 +452,14 @@ const ViewProfile = () => {
     }
 
     // Phone number validation
-    if (!formData.phone_number?.trim()) {
-      newErrors.phone_number = "Phone Number is required";
+    if (!formData.number?.trim()) {
+      newErrors.number = "Phone Number is required";
       isValid = false;
-    } else if (!/^\d{10}$/.test(formData.phone_number)) {
-      newErrors.phone_number = "Enter a valid 10-digit Phone Number";
+    } else if (!/^\d{10}$/.test(formData.number)) {
+      newErrors.number = "Enter a valid 10-digit Phone Number";
       isValid = false;
     } else {
-      newErrors.phone_number = "";
+      newErrors.number = "";
     }
 
     // Aadhaar validation
@@ -782,23 +782,23 @@ const ViewProfile = () => {
                   </Text>
                   <View
                     className={`mb-1 border ${
-                      errors.phone_number ? "border-red-500" : "border-gray-300"
+                      errors.number ? "border-red-500" : "border-gray-300"
                     } rounded-xl px-4 py-2 flex-row items-center bg-accent-100`}
                   >
                     <Ionicons name="call-outline" size={18} color="#8C8E98" />
                     <TextInput
                       placeholder="Your phone number"
                       className="flex-1 h-12 ml-2 font-rubik text-gray-500"
-                      value={formData.phone_number}
+                      value={formData.number}
                       editable={false}
                       selectTextOnFocus={false}
                       accessibilityLabel="Phone number input field (non-editable)"
                       testID="phone-number-input"
                     />
                   </View>
-                  {errors.phone_number ? (
+                  {errors.number ? (
                     <Text className="text-danger text-xs mb-3 ml-1 font-rubik">
-                      {errors.phone_number}
+                      {errors.number}
                     </Text>
                   ) : (
                     <View className="mb-3" />

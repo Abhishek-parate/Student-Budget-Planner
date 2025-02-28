@@ -105,7 +105,7 @@ export default function LoginScreen() {
             // Fetch user profile with number verification status
             const { data: profile, error: profileError } = await supabase
                 .from('profiles')
-                .select('phone_number, phone_verified')
+                .select('number, phone_verified')
                 .eq('id', user.id)
                 .maybeSingle();
 
@@ -119,7 +119,7 @@ export default function LoginScreen() {
             if (!profile) {
                 // No profile exists - redirect to number verification
                 router.replace('/profile/(number)');
-            } else if (!profile.phone_number || !profile.phone_verified) {
+            } else if (!profile.number || !profile.phone_verified) {
                 // Profile exists but number not verified - redirect to number verification
                 router.replace('/profile/(number)');
 
