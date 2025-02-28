@@ -244,26 +244,7 @@ export default function LoginScreen() {
                         </View>
                         {passwordError ? <Text className="text-danger text-xs mb-3 ml-1 font-rubik">{passwordError}</Text> : <View className="mb-1" />}
 
-                        {/* Remember me and Forgot password row */}
-                        <View className="flex-row justify-between items-center mb-6">
-                            <TouchableOpacity
-                                className="flex-row items-center"
-                                onPress={() => setRememberMe(!rememberMe)}
-                                accessibilityLabel="Remember me checkbox"
-                                accessibilityRole="checkbox"
-                                accessibilityState={{ checked: rememberMe }}
-                            >
-                                <View className={`w-5 h-5 rounded-md border items-center justify-center mr-2 ${rememberMe ? 'bg-primary-400 border-primary-400' : 'border-gray-300'}`}>
-                                    {rememberMe && <Ionicons name="checkmark" size={14} color="white" />}
-                                </View>
-                                <Text className="text-black-100 font-rubik-medium text-sm">Remember me</Text>
-                            </TouchableOpacity>
-
-                            <Link href="/forgot-password">
-                                <Text className="text-primary-400 font-rubik-medium text-sm">Forgot Password?</Text>
-                            </Link>
-                        </View>
-
+                       
                         {/* Login button with elevation */}
                         <TouchableOpacity
                             className="bg-primary-400 py-3.5 rounded-xl items-center mb-5 shadow-md"

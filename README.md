@@ -3,6 +3,19 @@
 
 A **React Native** app powered by **Supabase**, designed to help students effectively manage their expenses, track income, and stay within their budget.
 
+## Problem-
+- Managing finances is a major challenge for students as they struggle to balance their expenses with limited income. 
+The rising cost of living, including rent, food, and tuition, makes it difficult for many to meet their financial needs.
+- Additionally, unexpected expenses such as medical bills or laptop repairs add to their financial stress. 
+Students who work part-time often find it hard to save money while covering their daily expenses. 
+Moreover, peer pressure plays a significant role in unnecessary spending on outings and trends, further straining their budgets. 
+- As a result, managing finances effectively becomes a continuous challenge for students.
+
+## Solution-
+- A Student Budget Planner is a smart tool that helps students manage money effectively by tracking expenses, categorizing spending, and providing bill reminders.
+- It encourages better financial habits, such as using student discounts and avoiding unnecessary purchases. 
+By setting savings goals and offering smart alerts, it helps students stay financially stable, reduce stress, and focus on their studies.
+
 ## Features
 - 📊 **Expense Tracking** – Log daily expenses with category tagging.
 - 💰 **Income Management** – Track monthly allowances, salaries, or any other sources of income.
