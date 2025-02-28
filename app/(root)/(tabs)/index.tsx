@@ -5,6 +5,8 @@ import { LineChart } from 'react-native-chart-kit';
 import { Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+import { useNavigation } from '@react-navigation/native';
+
 const HomePage = () => {
   const [user, setUser] = useState(null);
   const [budgetSummary, setBudgetSummary] = useState({
@@ -13,6 +15,8 @@ const HomePage = () => {
     remaining: 550,
   });
   const [recentTransactions, setRecentTransactions] = useState([]);
+  const navigation = useNavigation();
+
   const [categories, setCategories] = useState([
     { id: 1, name: 'Food', icon: 'fast-food', spent: 250, limit: 400, color: '#0061FF' },
     { id: 2, name: 'Transport', icon: 'bus', spent: 120, limit: 200, color: '#F75555' },
@@ -31,6 +35,11 @@ const HomePage = () => {
       },
     ],
   };
+
+  const handleSetBudget = () => {
+    navigation.navigate('Budget');
+  };
+
 
   useEffect(() => {
     // Fetch user data
@@ -103,11 +112,11 @@ const HomePage = () => {
         <View className="mx-4 flex-row justify-between mb-4">
           <TouchableOpacity className="bg-primary-300 px-4 py-3 rounded-xl flex-row items-center w-[48%]">
             <Ionicons name="add-circle" size={24} color="white" />
-            <Text className="font-rubik-medium text-white ml-2">Add Expense</Text>
+            <Text className="font-rubik-medium text-white ml-2" >Add Expense</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="bg-white border border-primary-300 px-4 py-3 rounded-xl flex-row items-center w-[48%]">
+          <TouchableOpacity    onPress={handleSetBudget} className="bg-white border border-primary-300 px-4 py-3 rounded-xl flex-row items-center w-[48%]">
             <Ionicons name="arrow-forward-circle" size={24} color="#0061FF" />
-            <Text className="font-rubik-medium text-primary-300 ml-2">Set Budget</Text>
+            <Text className="font-rubik-medium text-primary-300 ml-2" >Set Budget</Text>
           </TouchableOpacity>
         </View>
 

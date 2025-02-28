@@ -71,13 +71,7 @@ const TabsLayout = () => {
           tabBarIcon: ({ focused }) => <TabIcon focused={focused} icon={icons.person} title="Profile" />,
         }}
       />
-       <Tabs.Screen
-        name="chat"
-        options={{
-          title: "Profile",
-          tabBarIcon: ({ focused }) => <TabIcon focused={focused} icon={icons.chat} title="chat" />,
-        }}
-      />
+      
     </Tabs>
   );
 };
