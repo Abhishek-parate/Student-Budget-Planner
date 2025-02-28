@@ -7,9 +7,9 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { useNavigation } from '@react-navigation/native';
 import { router } from 'expo-router';
+import { useAuth } from '@/contexts/AuthProvider';
 
 const HomePage = () => {
-  const [user, setUser] = useState(null);
   const [budgetSummary, setBudgetSummary] = useState({
     totalBudget: 1200,
     spent: 650,
@@ -37,6 +37,12 @@ const HomePage = () => {
     ],
   };
 
+  // Get user from auth context
+  const { user } = useAuth();
+  
+  // Get display name from user object
+  const displayName = user?.user_metadata?.full_name || user?.email || "Student";
+
   const handleSetBudget = () => {
     router.replace('/budget');
   };
@@ -45,14 +51,7 @@ const HomePage = () => {
     router.replace('/expense');
   };
 
-
   useEffect(() => {
-    // Fetch user data
-    const fetchUser = async () => {
-      const { data, error } = await supabase.auth.getUser();
-      if (data?.user) setUser(data.user);
-    };
-
     // Fetch recent transactions
     const fetchTransactions = async () => {
       const { data, error } = await supabase
@@ -64,7 +63,6 @@ const HomePage = () => {
       if (data) setRecentTransactions(data);
     };
 
-    fetchUser();
     fetchTransactions();
   }, []);
 
@@ -77,7 +75,7 @@ const HomePage = () => {
         {/* Header */}
         <View className="px-4 py-4 flex-row justify-between items-center">
           <View>
-            <Text className="font-rubik-medium text-black-300 text-xl">Hello, {user?.email?.split('@')[0] || 'Student'}</Text>
+            <Text className="font-rubik-medium text-black-300 text-xl">Hello, {displayName}</Text>
             <Text className="font-rubik text-black-100">Let's manage your budget!</Text>
           </View>
           <TouchableOpacity className="w-10 h-10 bg-primary-100 rounded-full items-center justify-center">
@@ -119,7 +117,7 @@ const HomePage = () => {
             <Ionicons name="add-circle" size={24} color="white" />
             <Text className="font-rubik-medium text-white ml-2" >Add Expense</Text>
           </TouchableOpacity>
-          <TouchableOpacity    onPress={handleSetBudget} className="bg-white border border-primary-300 px-4 py-3 rounded-xl flex-row items-center w-[48%]">
+          <TouchableOpacity onPress={handleSetBudget} className="bg-white border border-primary-300 px-4 py-3 rounded-xl flex-row items-center w-[48%]">
             <Ionicons name="arrow-forward-circle" size={24} color="#0061FF" />
             <Text className="font-rubik-medium text-primary-300 ml-2" >Set Budget</Text>
           </TouchableOpacity>
