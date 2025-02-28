@@ -162,7 +162,7 @@ export default function SignupScreen() {
 
     const renderRegisterScreen = () => (
         <SafeAreaView className="flex-1 bg-white">
-            <StatusBar barStyle="light-content" backgroundColor="#5e17eb" />
+            <StatusBar barStyle="light-content" backgroundColor="#0061FF" />
             <KeyboardAvoidingView 
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
                 className="flex-1"
