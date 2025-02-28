@@ -13,6 +13,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { supabase } from '@supabase/supabase-js';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { router } from 'expo-router';
 
 const SetBudgetPage = () => {
   const navigation = useNavigation();
@@ -170,6 +171,10 @@ const SetBudgetPage = () => {
     );
   };
 
+      const handleGoBack = () => {
+        router.replace('/(tabs)');
+      };
+
   const navigateMonth = (increment) => {
     let newMonth = selectedMonth + increment;
     let newYear = selectedYear;
@@ -190,7 +195,7 @@ const SetBudgetPage = () => {
     <SafeAreaView className="flex-1 bg-accent-100">
       {/* Header */}
       <View className="px-4 py-4 flex-row items-center">
-        <TouchableOpacity onPress={() => navigation.goBack()} className="mr-4">
+        <TouchableOpacity onPress={() => navigation.goBack()} className="mr-4" onPress={handleGoBack}>
           <Ionicons name="arrow-back" size={24} color="#191D31" />
         </TouchableOpacity>
         <Text className="font-rubik-semibold text-black-300 text-xl">Set Monthly Budget</Text>

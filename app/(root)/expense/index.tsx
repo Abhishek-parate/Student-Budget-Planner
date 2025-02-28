@@ -18,6 +18,7 @@ import { useNavigation } from '@react-navigation/native';
 import { supabase } from '@supabase/supabase-js';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { router } from 'expo-router';
 
 const AddExpensePage = () => {
   const navigation = useNavigation();
@@ -141,6 +142,10 @@ const AddExpensePage = () => {
     }
   };
 
+    const handleGoBack = () => {
+      router.replace('/(tabs)');
+    };
+
   // Track scroll position to implement "scroll to top" functionality
   const handleScroll = (event) => {
     const currentY = event.nativeEvent.contentOffset.y;
@@ -172,7 +177,7 @@ const AddExpensePage = () => {
         <View className="flex-1">
           {/* Header */}
           <View className="px-4 py-4 flex-row items-center">
-            <TouchableOpacity onPress={() => navigation.goBack()} className="mr-4">
+            <TouchableOpacity onPress={handleGoBack} className="mr-4">
               <Ionicons name="arrow-back" size={24} color="#191D31" />
             </TouchableOpacity>
             <Text className="font-rubik-semibold text-black-300 text-xl">Add Expense</Text>
