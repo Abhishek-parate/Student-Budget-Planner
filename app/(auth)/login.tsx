@@ -157,6 +157,9 @@ export default function LoginScreen() {
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{ flexGrow: 1 }}
                 >
+
+
+                    
                     {/* Purple background with illustration */}
                     <View className="h-64 bg-primary-400 px-6 pt-6 pb-4 relative">
                         <View className="items-center justify-center flex-1">
