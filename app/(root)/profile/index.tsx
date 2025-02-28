@@ -162,13 +162,12 @@ const useProfileData = (session) => {
     full_name: "",
     first_name: "",
     last_name: "",
-    phone_number: "",
+    number: "",
     date_of_birth: "",
     bio: "",
     location: "",
-    aadhaar_number: "",
+    adhaar_number: "",
     membership_type: "",
-    level: "",
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -187,8 +186,8 @@ const useProfileData = (session) => {
         .select(
           `
            website, avatar_url, full_name, 
-          first_name, last_name, phone_number, date_of_birth,
-          bio, location, aadhaar_number, membership_type, level
+          first_name, last_name, number, date_of_birth,
+          bio, location, adhaar_number, membership_type
         `
         )
         .eq("id", session.user.id)
@@ -205,13 +204,12 @@ const useProfileData = (session) => {
           full_name: data.full_name || "",
           first_name: data.first_name || "",
           last_name: data.last_name || "",
-          phone_number: data.phone_number || "",
+          number: data.number || "",
           date_of_birth: data.date_of_birth || "",
           bio: data.bio || "",
           location: data.location || "",
-          aadhaar_number: data.aadhaar_number || "",
+          adhaar_number: data.adhaar_number || "",
           membership_type: data.membership_type || "",
-          level: data.level || "",
         });
       }
     } catch (error) {
@@ -411,13 +409,12 @@ const ViewProfile = () => {
   const [errors, setErrors] = useState({
     first_name: "",
     last_name: "",
-    phone_number: "",
+    number: "",
     date_of_birth: "",
-    aadhaar_number: "",
+    adhaar_number: "",
     website: "",
     bio: "",
     membership_type: "",
-    level: "",
   });
 
   useWarmUpBrowser();
@@ -452,25 +449,25 @@ const ViewProfile = () => {
     }
 
     // Phone number validation
-    if (!formData.phone_number?.trim()) {
-      newErrors.phone_number = "Phone Number is required";
+    if (!formData.number?.trim()) {
+      newErrors.number = "Phone Number is required";
       isValid = false;
-    } else if (!/^\d{10}$/.test(formData.phone_number)) {
-      newErrors.phone_number = "Enter a valid 10-digit Phone Number";
+    } else if (!/^\d{10}$/.test(formData.number)) {
+      newErrors.number = "Enter a valid 10-digit Phone Number";
       isValid = false;
     } else {
-      newErrors.phone_number = "";
+      newErrors.number = "";
     }
 
     // Aadhaar validation
-    if (!formData.aadhaar_number?.trim()) {
-      newErrors.aadhaar_number = "Aadhaar number is required";
+    if (!formData.adhaar_number?.trim()) {
+      newErrors.adhaar_number = "Aadhaar number is required";
       isValid = false;
-    } else if (!/^\d{12}$/.test(formData.aadhaar_number)) {
-      newErrors.aadhaar_number = "Enter a valid 12-digit Aadhaar number";
+    } else if (!/^\d{12}$/.test(formData.adhaar_number)) {
+      newErrors.adhaar_number = "Enter a valid 12-digit Aadhaar number";
       isValid = false;
     } else {
-      newErrors.aadhaar_number = "";
+      newErrors.adhaar_number = "";
     }
 
     setErrors(newErrors);
@@ -782,23 +779,23 @@ const ViewProfile = () => {
                   </Text>
                   <View
                     className={`mb-1 border ${
-                      errors.phone_number ? "border-red-500" : "border-gray-300"
+                      errors.number ? "border-red-500" : "border-gray-300"
                     } rounded-xl px-4 py-2 flex-row items-center bg-accent-100`}
                   >
                     <Ionicons name="call-outline" size={18} color="#8C8E98" />
                     <TextInput
                       placeholder="Your phone number"
                       className="flex-1 h-12 ml-2 font-rubik text-gray-500"
-                      value={formData.phone_number}
+                      value={formData.number}
                       editable={false}
                       selectTextOnFocus={false}
                       accessibilityLabel="Phone number input field (non-editable)"
                       testID="phone-number-input"
                     />
                   </View>
-                  {errors.phone_number ? (
+                  {errors.number ? (
                     <Text className="text-danger text-xs mb-3 ml-1 font-rubik">
-                      {errors.phone_number}
+                      {errors.number}
                     </Text>
                   ) : (
                     <View className="mb-3" />
@@ -921,7 +918,7 @@ const ViewProfile = () => {
                   </Text>
                   <View
                     className={`mb-1 border ${
-                      errors.aadhaar_number
+                      errors.adhaar_number
                         ? "border-red-500"
                         : "border-gray-300"
                     } rounded-xl px-4 py-2 flex-row items-center bg-accent-100`}
@@ -930,16 +927,16 @@ const ViewProfile = () => {
                     <TextInput
                       placeholder="Your Aadhaar number"
                       className="flex-1 h-12 ml-2 font-rubik text-gray-500"
-                      value={formData.aadhaar_number}
+                      value={formData.adhaar_number}
                       editable={false}
                       selectTextOnFocus={false}
                       accessibilityLabel="Aadhaar number input field (non-editable)"
                       testID="aadhaar-number-input"
                     />
                   </View>
-                  {errors.aadhaar_number ? (
+                  {errors.adhaar_number ? (
                     <Text className="text-danger text-xs mb-3 ml-1 font-rubik">
-                      {errors.aadhaar_number}
+                      {errors.adhaar_number}
                     </Text>
                   ) : (
                     <View className="mb-3" />
@@ -968,73 +965,7 @@ const ViewProfile = () => {
                   <View className="mb-3" />
                 </View>
 
-                {/* Level Input */}
-                <View>
-                  <Text className="text-primary-400 text-sm mb-1 font-rubik-medium">
-                    Level
-                  </Text>
-                  <View className="mb-1 border border-gray-300 rounded-xl px-4 py-2 bg-accent-100">
-                    <View className="flex-row items-center">
-                      <Ionicons
-                        name="trophy-outline"
-                        size={18}
-                        color="#8C8E98"
-                      />
-                      <Picker
-                        selectedValue={formData.level}
-                        onValueChange={(itemValue) =>
-                          handleChange("level", itemValue)
-                        }
-                        style={{
-                          flex: 1,
-                          height: 60,
-                          marginLeft: 8,
-                          color: formData.level ? "#333333" : "#8C8E98",
-                          fontFamily: "Rubik-Medium",
-                        }}
-                        dropdownIconColor="#5e17eb"
-                        accessibilityLabel="Level select field"
-                        testID="level-select"
-                        mode="dropdown"
-                        itemStyle={{
-                          fontFamily: "Rubik-Regular",
-                          fontSize: 16,
-                        }}
-                      >
-                        <Picker.Item
-                          label="Select Level"
-                          value=""
-                          style={{
-                            color: "#8C8E98",
-                            fontFamily: "Rubik-Regular",
-                          }}
-                        />
-                        <Picker.Item
-                          label="Beginner"
-                          value="Beginner"
-                          style={{
-                            color: "#4CAF50",
-                            fontFamily: "Rubik-Medium",
-                          }}
-                        />
-                        <Picker.Item
-                          label="Intermediate"
-                          value="Intermediate"
-                          style={{
-                            color: "#2196F3",
-                            fontFamily: "Rubik-Medium",
-                          }}
-                        />
-                        <Picker.Item
-                          label="Expert"
-                          value="Expert"
-                          style={{ color: "#9C27B0", fontFamily: "Rubik-Bold" }}
-                        />
-                      </Picker>
-                    </View>
-                  </View>
-                  <View className="mb-3" />
-                </View>
+            
 
                 {/* Website Input */}
                 <View>
