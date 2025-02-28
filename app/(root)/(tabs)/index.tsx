@@ -37,7 +37,7 @@ const HomePage = () => {
   };
 
   const handleSetBudget = () => {
-    navigation.navigate('Budget');
+    navigation.navigate('/budget');
   };
 
 
