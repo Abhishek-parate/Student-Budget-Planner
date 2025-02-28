@@ -166,9 +166,8 @@ const useProfileData = (session) => {
     date_of_birth: "",
     bio: "",
     location: "",
-    aadhaar_number: "",
+    adhaar_number: "",
     membership_type: "",
-    level: "",
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -188,7 +187,7 @@ const useProfileData = (session) => {
           `
            website, avatar_url, full_name, 
           first_name, last_name, number, date_of_birth,
-          bio, location, aadhaar_number, membership_type, level
+          bio, location, adhaar_number, membership_type
         `
         )
         .eq("id", session.user.id)
@@ -209,9 +208,8 @@ const useProfileData = (session) => {
           date_of_birth: data.date_of_birth || "",
           bio: data.bio || "",
           location: data.location || "",
-          aadhaar_number: data.aadhaar_number || "",
+          adhaar_number: data.adhaar_number || "",
           membership_type: data.membership_type || "",
-          level: data.level || "",
         });
       }
     } catch (error) {
@@ -413,11 +411,10 @@ const ViewProfile = () => {
     last_name: "",
     number: "",
     date_of_birth: "",
-    aadhaar_number: "",
+    adhaar_number: "",
     website: "",
     bio: "",
     membership_type: "",
-    level: "",
   });
 
   useWarmUpBrowser();
@@ -463,14 +460,14 @@ const ViewProfile = () => {
     }
 
     // Aadhaar validation
-    if (!formData.aadhaar_number?.trim()) {
-      newErrors.aadhaar_number = "Aadhaar number is required";
+    if (!formData.adhaar_number?.trim()) {
+      newErrors.adhaar_number = "Aadhaar number is required";
       isValid = false;
-    } else if (!/^\d{12}$/.test(formData.aadhaar_number)) {
-      newErrors.aadhaar_number = "Enter a valid 12-digit Aadhaar number";
+    } else if (!/^\d{12}$/.test(formData.adhaar_number)) {
+      newErrors.adhaar_number = "Enter a valid 12-digit Aadhaar number";
       isValid = false;
     } else {
-      newErrors.aadhaar_number = "";
+      newErrors.adhaar_number = "";
     }
 
     setErrors(newErrors);
@@ -790,7 +787,7 @@ const ViewProfile = () => {
                       placeholder="Your phone number"
                       className="flex-1 h-12 ml-2 font-rubik text-gray-500"
                       value={formData.number}
-                      editable={false}
+                      
                       selectTextOnFocus={false}
                       accessibilityLabel="Phone number input field (non-editable)"
                       testID="phone-number-input"
@@ -805,34 +802,7 @@ const ViewProfile = () => {
                   )}
                 </View>
 
-                <View>
-                  <Text className="text-primary-400 text-sm mb-1 font-rubik-medium">
-                    Date of Birth
-                  </Text>
-                  <View
-                    className={`mb-1 border ${
-                      errors.date_of_birth
-                        ? "border-red-500"
-                        : "border-gray-300"
-                    } rounded-xl px-4 py-2 flex-row items-center bg-accent-100`}
-                  >
-                    <Ionicons
-                      name="calendar-outline"
-                      size={18}
-                      color="#8C8E98"
-                    />
-                    <Text className="flex-1 ml-4 font-rubik text-gray-500 py-3">
-                      {formData.date_of_birth || "No date selected"}
-                    </Text>
-                  </View>
-                  {errors.date_of_birth ? (
-                    <Text className="text-danger text-xs mb-3 ml-1 font-rubik">
-                      {errors.date_of_birth}
-                    </Text>
-                  ) : (
-                    <View className="mb-3" />
-                  )}
-                </View>
+          
 
                 {/* Bio Input */}
                 <View>
@@ -914,149 +884,10 @@ const ViewProfile = () => {
                   )}
                 </View>
 
-                {/* Aadhaar Number Input */}
-                <View>
-                  <Text className="text-primary-400 text-sm mb-1 font-rubik-medium">
-                    Aadhaar Number
-                  </Text>
-                  <View
-                    className={`mb-1 border ${
-                      errors.aadhaar_number
-                        ? "border-red-500"
-                        : "border-gray-300"
-                    } rounded-xl px-4 py-2 flex-row items-center bg-accent-100`}
-                  >
-                    <Ionicons name="card-outline" size={18} color="#8C8E98" />
-                    <TextInput
-                      placeholder="Your Aadhaar number"
-                      className="flex-1 h-12 ml-2 font-rubik text-gray-500"
-                      value={formData.aadhaar_number}
-                      editable={false}
-                      selectTextOnFocus={false}
-                      accessibilityLabel="Aadhaar number input field (non-editable)"
-                      testID="aadhaar-number-input"
-                    />
-                  </View>
-                  {errors.aadhaar_number ? (
-                    <Text className="text-danger text-xs mb-3 ml-1 font-rubik">
-                      {errors.aadhaar_number}
-                    </Text>
-                  ) : (
-                    <View className="mb-3" />
-                  )}
-                </View>
+      
 
-                {/* Membership Type Input */}
-                <View>
-                  <Text className="text-primary-400 text-sm mb-1 font-rubik-medium">
-                    Membership Type
-                  </Text>
-                  <View
-                    className={`mb-1 border border-gray-300 rounded-xl px-4 py-2 flex-row items-center bg-accent-100`}
-                  >
-                    <Ionicons name="people-outline" size={18} color="#8C8E98" />
-                    <TextInput
-                      placeholder="Your membership type"
-                      className="flex-1 h-12 ml-2 font-rubik text-gray-500"
-                      value={formData.membership_type}
-                      editable={false}
-                      selectTextOnFocus={false}
-                      accessibilityLabel="Membership type input field (non-editable)"
-                      testID="membership-type-input"
-                    />
-                  </View>
-                  <View className="mb-3" />
-                </View>
+            
 
-                {/* Level Input */}
-                <View>
-                  <Text className="text-primary-400 text-sm mb-1 font-rubik-medium">
-                    Level
-                  </Text>
-                  <View className="mb-1 border border-gray-300 rounded-xl px-4 py-2 bg-accent-100">
-                    <View className="flex-row items-center">
-                      <Ionicons
-                        name="trophy-outline"
-                        size={18}
-                        color="#8C8E98"
-                      />
-                      <Picker
-                        selectedValue={formData.level}
-                        onValueChange={(itemValue) =>
-                          handleChange("level", itemValue)
-                        }
-                        style={{
-                          flex: 1,
-                          height: 60,
-                          marginLeft: 8,
-                          color: formData.level ? "#333333" : "#8C8E98",
-                          fontFamily: "Rubik-Medium",
-                        }}
-                        dropdownIconColor="#5e17eb"
-                        accessibilityLabel="Level select field"
-                        testID="level-select"
-                        mode="dropdown"
-                        itemStyle={{
-                          fontFamily: "Rubik-Regular",
-                          fontSize: 16,
-                        }}
-                      >
-                        <Picker.Item
-                          label="Select Level"
-                          value=""
-                          style={{
-                            color: "#8C8E98",
-                            fontFamily: "Rubik-Regular",
-                          }}
-                        />
-                        <Picker.Item
-                          label="Beginner"
-                          value="Beginner"
-                          style={{
-                            color: "#4CAF50",
-                            fontFamily: "Rubik-Medium",
-                          }}
-                        />
-                        <Picker.Item
-                          label="Intermediate"
-                          value="Intermediate"
-                          style={{
-                            color: "#2196F3",
-                            fontFamily: "Rubik-Medium",
-                          }}
-                        />
-                        <Picker.Item
-                          label="Expert"
-                          value="Expert"
-                          style={{ color: "#9C27B0", fontFamily: "Rubik-Bold" }}
-                        />
-                      </Picker>
-                    </View>
-                  </View>
-                  <View className="mb-3" />
-                </View>
-
-                {/* Website Input */}
-                <View>
-                  <Text className="text-primary-400 text-sm mb-1 font-rubik-medium">
-                    Website
-                  </Text>
-                  <View
-                    className={`mb-1 border border-gray-300 rounded-xl px-4 py-2 flex-row items-center bg-accent-100`}
-                  >
-                    <Ionicons name="globe-outline" size={18} color="#8C8E98" />
-                    <TextInput
-                      placeholder="Your website"
-                      className="flex-1 h-12 ml-2 font-rubik"
-                      value={formData.website}
-                      onChangeText={(text) => handleChange("website", text)}
-                      autoCapitalize="none"
-                      accessibilityLabel="Website input field"
-                      testID="website-input"
-                    />
-                  </View>
-                  <View className="mb-3" />
-                </View>
 
                 <View className="p-5">
                   <Text className="text-lg font-medium mb-5 text-gray-800">
