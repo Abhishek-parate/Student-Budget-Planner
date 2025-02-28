@@ -6,6 +6,7 @@ import { Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { useNavigation } from '@react-navigation/native';
+import { router } from 'expo-router';
 
 const HomePage = () => {
   const [user, setUser] = useState(null);
@@ -37,7 +38,11 @@ const HomePage = () => {
   };
 
   const handleSetBudget = () => {
-    navigation.navigate('/budget');
+    router.replace('/budget');
+  };
+
+  const handleSetExpense = () => {
+    router.replace('/expense');
   };
 
 
@@ -110,7 +115,7 @@ const HomePage = () => {
 
         {/* Quick Actions */}
         <View className="mx-4 flex-row justify-between mb-4">
-          <TouchableOpacity className="bg-primary-300 px-4 py-3 rounded-xl flex-row items-center w-[48%]">
+          <TouchableOpacity onPress={handleSetExpense}  className="bg-primary-300 px-4 py-3 rounded-xl flex-row items-center w-[48%]">
             <Ionicons name="add-circle" size={24} color="white" />
             <Text className="font-rubik-medium text-white ml-2" >Add Expense</Text>
           </TouchableOpacity>
